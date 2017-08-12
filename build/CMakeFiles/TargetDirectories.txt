@@ -1,0 +1,3 @@
+/media/ubuntu/CA3213EB3213DAF1/Nueva carpeta/CarND-MPC-Project-master/build/CMakeFiles/edit_cache.dir
+/media/ubuntu/CA3213EB3213DAF1/Nueva carpeta/CarND-MPC-Project-master/build/CMakeFiles/rebuild_cache.dir
+/media/ubuntu/CA3213EB3213DAF1/Nueva carpeta/CarND-MPC-Project-master/build/CMakeFiles/mpc.dir
