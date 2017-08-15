@@ -3,19 +3,47 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 # The Model: Student describes their model in detail. This includes the state, actuators and update equations.
-11
+
+The model used in the project is the kinematic model described in the course
+That is characterized by:
+- State:
+ * X & Y as the position in the coordinates
+ * psi as the vehicle orientation
+ * v as the velocity
+- Actuators: i.e control input
+ * delta as the steering wheel
+ * a break pedal/acceleration
+And finally the cross track error (cte) (that i do not know where could be classified).
+
+The update equations used are the described in the course (MPC.cpp line 110).
 
 ---
 # Timestep Length and Elapsed Duration (N & dt): Student discusses the reasoning behind the chosen N (timestep length) and dt (elapsed duration between timesteps) values. Additionally the student details the previous values tried.
-11
+
+Recap from the course (would be useful for me in the future).
+"The prediction horizon is the duration over which future predictions are made. We’ll refer to this as T.
+T is the product of two other variables, N and dt.
+N is the number of timesteps in the horizon. dt is how much time elapses between actuations. For example, if N were 20 and dt were 0.5, then T would be 10 seconds.
+N, dt, and T are hyperparameters you will need to tune for each model predictive controller you build"
+
+The values choosen in my project are: N=10, dt=0.1, where T=1, therefore the horizon or the duration of the future prediction is of 1 second.
+To be honest, I choose these values because I read in the slack chat about that configuration (thank you guys).
+I've tried with N=25 and dt=0.05 but seems to perform slightly better with the first configuration.
 
 ---
 # Polynomial Fitting and MPC Preprocessing: A polynomial is fitted to waypoints. If the student preprocesses waypoints, the vehicle state, and/or actuators prior to the MPC procedure it is described.
-22
+
+In this case the problem is practically the same as the last project (PID control), in which the global coordinates and the coordinates seen by the vehicles are different. In order to cope with this problem I applied the same transformation as in the last project.
+
+"Remember that the server returns waypoints using the map's coordinate system, which is different than the car's coordinate system. Transforming these waypoints will make it easier to both display them and to calculate the CTE and Epsi values for the model predictive controller."
 
 ---
 # Model Predictive Control with Latency. The student implements Model Predictive Control that handles a 100 millisecond latency. Student provides details on how they deal with latency.
-33
+
+In a real vehicle actuators are limited by physical effects. In this project we have to handle with a "fake" latency of 100ms that emulates the order-to-actuation effect.
+In order to do so, I applied or compensate this latency before computing the state (MPC.cpp - 132-134)
+
+It's still unclear for me how this can be improved (I would like some suggestions by the reviewer).
 
 ---
 
