@@ -33,7 +33,7 @@ I've tried with N=25 and dt=0.05 but seems to perform slightly better with the f
 ---
 # Polynomial Fitting and MPC Preprocessing: A polynomial is fitted to waypoints. If the student preprocesses waypoints, the vehicle state, and/or actuators prior to the MPC procedure it is described.
 
-In this case the problem is practically the same as the last project (PID control), in which the global coordinates and the coordinates seen by the vehicles are different. In order to cope with this problem I applied the same transformation as in the last project.
+In this case the problem is practically the same as the last project (PID control), in which the global coordinates and the coordinates seen by the vehicles are different. In order to cope with this problem I applied the same transformation as in the last project. (MPC.cpp line 109)
 
 "Remember that the server returns waypoints using the map's coordinate system, which is different than the car's coordinate system. Transforming these waypoints will make it easier to both display them and to calculate the CTE and Epsi values for the model predictive controller."
 
