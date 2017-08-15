@@ -118,20 +118,20 @@ int main() {
           double * p_ptsy = &ptsy[0];
           Eigen::Map<Eigen::VectorXd> car_x_points(p_ptsx, 6);
           Eigen::Map<Eigen::VectorXd> car_y_points(p_ptsy, 6);
-          .
-	  auto coeffs = polyfit(car_x_points, car_y_points, 3);
+          
+          auto coeffs = polyfit(car_x_points, car_y_points, 3);
           double cte = polyeval(coeffs,0);
           double epsi = - atan(coeffs[1]);
           
           Eigen::VectorXd state(6);
 
-	  double Lf = 2.67;
-	  const double dt = 0.1;
+          double Lf = 2.67;
+	      const double dt = 0.1;
   
-	  //compute prediction state *only values needed
-	  double pred_v = v+a*dt;
-	  double pred_cte = cte +v*sin(epsi)*dt;
-	  double pred_epsi = epsi + v * -delta/Lf*dt;
+	      //compute prediction state *only values needed
+          double pred_v = v+a*dt;
+          double pred_cte = cte +v*sin(epsi)*dt;
+          double pred_epsi = epsi + v * -delta/Lf*dt;
 
           state << 0, 0, 0, pred_v, pred_cte, pred_epsi;
           auto vars = mpc.Solve(state, coeffs);
@@ -148,10 +148,10 @@ int main() {
           //Display the MPC predicted trajectory 
           vector<double> mpc_x_vals;
           vector<double> mpc_y_vals;
-            for(int i=2;i<vars.size();i+=2){
-                    mpc_x_vals.push_back(vars[i]);
-                    mpc_y_vals.push_back(vars[i+1]);
-            }
+          for(int i=2;i<vars.size();i+=2){
+              mpc_x_vals.push_back(vars[i]);
+              mpc_y_vals.push_back(vars[i+1]);
+          }
           //.. add (x,y) points to list here, points are in reference to the vehicle's coordinate system
           // the points in the simulator are connected by a Green line
 
@@ -161,13 +161,13 @@ int main() {
           //Display the waypoints/reference line
           vector<double> next_x_vals;
           vector<double> next_y_vals;
-	  int poly = 2.5;
+	      int poly = 2.5;
           //.. add (x,y) points to list here, points are in reference to the vehicle's coordinate system
           // the points in the simulator are connected by a Yellow line
           for(int i=1;i<25;i++){
-		next_x_vals.push_back(i*poly);
-		next_y_vals.push_back(polyeval(coeffs,i*poly));
-	  }
+            next_x_vals.push_back(i*poly);
+            next_y_vals.push_back(polyeval(coeffs,i*poly));
+          }
           msgJson["next_x"] = next_x_vals;
           msgJson["next_y"] = next_y_vals;
 
